@@ -4,7 +4,7 @@ from langchain_core.prompts import ChatPromptTemplate
 SYSTEM_PROMPT = """
 You are a helpful AI assistant.
 Answer the question ONLY using the provided context.
-If the answer is not in the context, say "I don't know."
+If the answer is not in the context, say "Not within the provided context."
 """
 
 

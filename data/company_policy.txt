@@ -1,3 +1,11 @@
-Our company allows remote work 3 days a week.
-Employees get 24 paid leaves per year.
-Office hours are from 10 AM to 6 PM.
+Remote Work and Hybrid Schedule Policy
+1. Purpose and ScopePurpose: To provide guidelines for working from home while keeping communication and work quality high.
+    Scope: This policy applies to all full-time office staff who have permission from their team manager.
+2. Schedule and HoursHybrid Model: Staff must work from the office 3 days per week and may work from home for up to 2 days per week.
+    Core Hours: All workers must be online and active between 10:00 AM and 3:00 PM for team meetings.
+    Tracking: Employees must log their daily tasks and hours using the company time-tracking app.
+3. Home Office RequirementsInternet: Staff must have a private, secure, and fast internet connection at home.
+    Security: Workers must use the company Virtual Private Network (VPN) and lock their laptops when away from the screen.
+    Equipment: The company will give each worker a laptop, mouse, and keyboard. Employees must buy their own desk and chair.
+4. Communication RulesAvailability: Staff must answer Slack messages within 30 minutes during work hours.
+    Meetings: Video cameras must stay turned on during all weekly team meetings.
