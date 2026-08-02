@@ -1,6 +1,6 @@
 # RAG from Scratch
 
-A small Retrieval-Augmented Generation (RAG) application that answers questions using a local text document as context. The project uses LangChain, Ollama, and FAISS to load a policy document, split it into chunks, build a vector store, and retrieve relevant context before generating an answer.
+A small Retrieval-Augmented Generation (RAG) application that answers questions using a local text document as context. The project uses LangChain, Ollama, and FAISS to load a workers guidelines document, split it into chunks, build a vector store, and retrieve relevant context before generating an answer.
 
 ## Features
 
@@ -16,7 +16,7 @@ A small Retrieval-Augmented Generation (RAG) application that answers questions 
 - app/document_loader.py - loads and splits documents
 - app/vector_store.py - creates the FAISS vector store
 - app/rag_chain.py - builds the retrieval and generation flow
-- data/company_policy.txt - source document used by the app
+- data/workers_guidelines.txt - source document used by the app
 
 ```mermaid
 flowchart TD
@@ -72,7 +72,7 @@ Type your question at the prompt. Type exit to quit.
 
 ## How It Works
 
-1. The app loads the text file from data/company_policy.txt.
+1. The app loads the text file from data/workers_guidelines.txt.
 2. The text is split into smaller chunks.
 3. Each chunk is embedded and stored in a FAISS index.
 4. When you ask a question, the app retrieves the most relevant chunks.
