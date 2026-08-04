@@ -8,6 +8,7 @@ A small Retrieval-Augmented Generation (RAG) application that answers questions 
 - Splits the document into searchable chunks
 - Builds a local FAISS vector store
 - Retrieves the most relevant chunks for each question
+- Applies simple reranking using keyword overlap and intent detection
 - Generates answers using an Ollama-hosted LLM
 
 ## Project Structure
@@ -26,8 +27,11 @@ flowchart TD
     D --> E[create_vector_store]
     E --> F[FAISS Vector Store]
     F --> G[create_rag_chain]
-    G --> H[LLM + Retriever]
-    H --> I[Answer]
+    G --> H[Detect Intent]
+    H --> I[Keyword Reranking]
+    I --> J[Top Relevant Chunks]
+    J --> K[LLM]
+    K --> L[Answer]
 ```
 
 ## Prerequisites
@@ -75,19 +79,23 @@ Type your question at the prompt. Type exit to quit.
 1. The app loads the text file from data/workers_guidelines.txt.
 2. The text is split into smaller chunks.
 3. Each chunk is embedded and stored in a FAISS index.
-4. When you ask a question, the app retrieves the most relevant chunks.
-5. Those chunks are passed to the LLM along with your question to generate an answer.
+4. When you ask a question, the app detects a simple intent such as leave request or overtime policy.
+5. It then reranks the retrieved chunks using keyword overlap and intent matching.
+6. The best chunks are passed to the LLM along with your question to generate an answer.
 
 ```mermaid
 sequenceDiagram
     participant U as User
     participant M as main.py
-    participant R as Retriever
+    participant I as Intent Detection
+    participant R as Reranker
     participant L as LLM
 
     U->>M: Ask a question
-    M->>R: Retrieve relevant chunks
-    R-->>M: Relevant context
+    M->>I: Detect intent
+    I-->>M: Intent label
+    M->>R: Retrieve and rerank chunks
+    R-->>M: Top relevant context
     M->>L: Send prompt + context
     L-->>M: Generated answer
     M-->>U: Display answer
@@ -97,3 +105,4 @@ sequenceDiagram
 
 - The current implementation answers only from the provided document context.
 - If the answer is not found in the retrieved chunks, it will return a fallback message.
+- The reranking step is intentionally simple and uses keyword overlap plus intent matching for clarity and easy extension.
