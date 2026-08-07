@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
 from document_loader import load_and_split_docs
 from vector_store import create_vector_store
 from rag_chain import create_rag_chain
+
+load_dotenv()
 
 
 def main():
