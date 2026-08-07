@@ -3,6 +3,8 @@ import re
 from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 
+from mcp_client import build_context_with_mcp, fetch_mcp_context
+
 SYSTEM_PROMPT = """
 You are a custom non-hallucinating AI assistant.
 Answer the questions given based ONLY on the provided context.
@@ -95,6 +97,8 @@ def create_rag_chain(vector_db):
         docs = docs[:3]
 
         context = "\n\n".join(doc.page_content for doc in docs)
+        mcp_context = fetch_mcp_context(question)
+        context = build_context_with_mcp(context, mcp_context)
 
         messages = prompt.format_messages(
             context=context,

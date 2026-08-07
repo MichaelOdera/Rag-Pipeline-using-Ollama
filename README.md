@@ -9,6 +9,7 @@ A small Retrieval-Augmented Generation (RAG) application that answers questions 
 - Builds a local FAISS vector store
 - Retrieves the most relevant chunks for each question
 - Applies simple reranking using keyword overlap and intent detection
+- Optionally enriches the context with MCP-provided data via a tool server
 - Generates answers using an Ollama-hosted LLM
 
 ## Project Structure
@@ -73,6 +74,41 @@ python app/main.py
 ```
 
 Type your question at the prompt. Type exit to quit.
+
+## MCP Integration
+
+The application can optionally use an MCP server to add extra context before answering a question.
+
+### MCP Architecture
+
+```mermaid
+flowchart LR
+    U[User Question] --> M[app/main.py]
+    M --> R[app/rag_chain.py]
+    R --> V[app/vector_store.py]
+    R --> C[app/mcp_client.py]
+    C --> S[MCP Server]
+    S -->|get_context tool| C
+    C -->|MCP context| R
+    R --> L[LLM (Ollama)]
+    L --> A[Answer]
+```
+
+### Enable MCP
+
+Set the following environment variables before starting the app:
+
+```bash
+set MCP_ENABLED=true
+set MCP_SERVER_COMMAND=python
+set MCP_SERVER_ARGS=server.py
+set MCP_TOOL_NAME=get_context
+set MCP_TOOL_ARGS_JSON={"question":"{question}"}
+```
+
+On Linux/macOS, use export instead of set.
+
+If MCP is disabled or the server is unavailable, the app will continue to work using the local document retrieval flow only.
 
 ## How It Works
 
