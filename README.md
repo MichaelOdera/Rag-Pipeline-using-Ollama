@@ -90,7 +90,7 @@ flowchart LR
     C --> S[MCP Server]
     S -->|get_context tool| C
     C -->|MCP context| R
-    R --> L[LLM (Ollama)]
+    R --> L["LLM (Ollama)"]
     L --> A[Answer]
 ```
 
